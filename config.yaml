@@ -1,0 +1,38 @@
+data_spec:
+  table_name: stg-event-dummy
+  records: 1000
+  file_format: csv # csv, parquet, json
+  file_prefix: data
+  destination: /YourPath/sample_data
+  # destination: s3://yourbucket/event-data/
+  partition_by:
+    name: partition_key
+    range:
+      min: "2025-01-01"
+      max: "2025-01-10"
+  table_schema:
+    - name: id
+      type: int
+      prefix: id_
+    - name: device_name
+      type: string
+      prefix: device_
+    - name: device_type
+      type: string
+      range:
+        items:
+          - "iphone"
+          - "galaxy"
+          - "xiaomi"
+          - "huawei"
+    - name: event_time
+      type: timestamp
+    - name: event_type
+      type: string
+    - name: event_rate
+      type: float
+      range:
+        min: 0 
+        max: 1
+      decimal_point: 2
+
